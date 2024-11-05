@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+    <style>
+      body {
+        background-color: #e6e6f0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .todo-container {
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        width: 400px;
+      }
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        font-weight: bold;
+      }
+      .todoItem {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="todo-container">
+      <h1>My Todos</h1>
+      <div class="input-group mb-3">
+        <input type="text" id="todo" class="form-control" />
+        <button class="btn btn-primary" id="add-todo">Add</button>
+      </div>
+      <ul class="list-group" id="todo-list"></ul>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
+      const addButton = document.getElementById('add-todo');
+      const todoInput = document.getElementById('todo');
+      const todoList = document.getElementById('todo-list');
+
+      function addTodo() {
+        const todoText = todoInput.value.trim();
+        console.log('testing');
+        if (todoText !== '') {
+          const listItem = document.createElement('li');
+          listItem.className = 'list-group-item todo-item d-flex justify-content-between align-items-center';
+          const checkbox = document.createElement('input');
+          checkbox.type = 'checkbox';
+          checkbox.className = 'form-check-input';
+          const text = document.createElement('span');
+          text.textContent = todoText;
+          const deleteButton = document.createElement('button');
+          deleteButton.className = 'btn btn-link text-danger';
+          deleteButton.textContent = 'Delete';
+          deleteButton.addEventListener('click', () => {
+            listItem.remove();
+          });
+          listItem.appendChild(checkbox);
+          listItem.appendChild(text);
+          listItem.appendChild(deleteButton);
+          todoList.appendChild(listItem);
+          todoInput.value = '';
+        }
+      }
+      addButton.addEventListener('click', addTodo);
+    </script>
+  </body>
+</html>
